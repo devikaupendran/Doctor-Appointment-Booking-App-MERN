@@ -37,6 +37,12 @@ const Sidebar = () => {
                         <p className='hidden md:block'>Doctors List</p>
                     </NavLink>
 
+                    <NavLink to={'/all-user'}
+                        className={({ isActive }) => `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? 'bg-[#F2F3FF] border-r-4 border-blue-500' : ''}`}>
+                        <img src={assets.people_icon} alt="people icon" />
+                        <p className='hidden md:block'>Users List</p>
+                    </NavLink>
+
                 </ul>
             }
 

@@ -110,6 +110,19 @@ export const appointmentsAdmin = async (req, res) => {
     }
 }
 
+//API to get all users list 
+export const allUsers = async (req, res) => {
+    try {
+        // Fetch all users from the database
+        const users = await userModel.find({}).select('-password'); // Excluding password from the response
+        res.json({ success: true, users });
+    }
+    catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
 //API for appointment cancellation
 export const appointmentCancelledByAdmin = async (req, res) => {
     try {
@@ -157,3 +170,4 @@ export const adminDashboard = async (req, res) => {
         res.json({ success: false, message: error.message })
     }
 }
+

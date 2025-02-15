@@ -19,6 +19,7 @@ app.use(cors()); //allows frontend to connect with backend
 
 //api endpoints
 app.get('/', (req, res) => {
+    
     res.send('api is working ')
 });
 

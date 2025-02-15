@@ -14,6 +14,7 @@ const AdminContextProvider = (props) => {
     const [doctors, setDoctors] = useState([]);
     const [appointments, setAppointments] = useState([]);
     const [dashData, setDashData] = useState(false)
+    const [users, setUsers] = useState([])
 
 
     const getAllDoctors = async () => {
@@ -22,6 +23,23 @@ const AdminContextProvider = (props) => {
             if (data.success) {
                 setDoctors(data.doctors);
                 console.log(data.doctors);
+            }
+            else {
+                toast.error(data.message)
+            }
+        }
+        catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    //function t get all the users 
+    const getAllUsers = async () => {
+        try {
+            const { data } = await axios.post(backendUrl + '/api/admin/all-users', {}, { headers: { admintoken } })
+            if (data.success) {
+                setUsers(data.users);
+                console.log(data.users);
             }
             else {
                 toast.error(data.message)
@@ -85,12 +103,12 @@ const AdminContextProvider = (props) => {
     const getDashData = async () => {
         try {
             const { data } = await axios.get(`${backendUrl}/api/admin/dashboard`, { headers: { admintoken } });
-                 if(data.success){
-                    setDashData(data.dashData)
-                    console.log(data.dashData)
-                 } else {
-                    toast.error(data.message)
-                 }
+            if (data.success) {
+                setDashData(data.dashData)
+                console.log(data.dashData)
+            } else {
+                toast.error(data.message)
+            }
         }
         catch (error) {
             toast.error(error.message)
@@ -99,7 +117,8 @@ const AdminContextProvider = (props) => {
 
     const value = {
         admintoken, setAdminToken, backendUrl, doctors, getAllDoctors, changeAvailability, getAllAppointments,
-        appointments, setAppointments, cancelAppointment,dashData, getDashData
+        appointments, setAppointments, cancelAppointment, dashData, getDashData,
+        getAllUsers, users, setUsers
     }
 
 
